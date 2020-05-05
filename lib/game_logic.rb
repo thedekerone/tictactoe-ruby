@@ -104,4 +104,3 @@ def start_game
     end
 end
 
-start_game()
