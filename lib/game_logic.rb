@@ -1,3 +1,5 @@
+require("rainbow")
+
 class Person 
     @@board=[1,2,3,4,5,6,7,8,9]
     @@winner=false;
@@ -42,11 +44,11 @@ class Player < Person
 
     def make_move
         while 1
-            puts "Enter the #{@name} move"
+            puts Rainbow("Enter the #{@name} move").blue.bright
             move = gets.chomp().to_i
             is_valid = choose_number(move)
             if(!is_valid)
-                puts "\nWrong input, try again!\n"
+                puts Rainbow("\nWrong input, try again!\n").red
                 next
             end
             break;
@@ -82,14 +84,13 @@ def start_game
         player1.make_move()
         drawer.draw_board()
         endgame+=1
-        p endgame
         if(drawer.isWinner(player1.sign))  
-            puts "Player 1 Wins"
+            puts Rainbow("Player 1 Wins").green.bright
             break
         end
 
         if endgame>8
-            puts "no winner"
+            puts Rainbow("no winner").bright
             break
         end
         
@@ -98,7 +99,7 @@ def start_game
         endgame+=1  
         
         if(drawer.isWinner(player2.sign))
-            puts "Player 2 wins"
+            puts Rainbow("Player 2 wins").green.bright
             break
         end 
     end
