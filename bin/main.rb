@@ -1,3 +1,5 @@
+require "../lib/game_lo"
+
 puts "Welcome to the game of Tictoe"
 
 puts "Instructions"
@@ -24,4 +26,3 @@ puts ("You have chosen number 5")
 puts ("\n")
 
 puts ("Player 1 wins")
-
