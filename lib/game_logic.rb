@@ -8,30 +8,16 @@ class Game
     @player2 = player2
     @endgame = 0
   end
+
+  def check_winner(player)
+    if winner?(player.sign)
+      "#{player.name} Wins"
+    end
+  end
   
 
-  def start_game
-    player1.make_move
-    board.draw_board
-    endgame += 1
-    if winner?(player1.sign)
-      puts Rainbow('Player 1 Wins').green.bright
-      break
-    end
-
-    if endgame > 8
-      puts Rainbow('Match tied, No winner is selected').bright
-      break
-    end
-
-    player2.make_move
-    board.draw_board
-    endgame += 1
-
-    if winner?(player2.sign)
-      puts Rainbow('Player 2 wins').green.bright
-      break
-    end
+  def start_game(player)
+    player.make_move
   end
 
   def winner?(sign)
@@ -67,18 +53,12 @@ class Board
 
     drawed
 
-    # puts("\t#{board_sign[0]} | #{board_sign[1]} | #{board_sign[2]} ")
-    # puts "\t---------"
-    # puts("\t#{board_sign[3]} | #{board_sign[4]} | #{board_sign[5]} ")
-    # puts "\t---------"
-    # puts("\t#{board_sign[6]} | #{board_sign[7]} | #{board_sign[8]} ")
-    # puts "\n"
   end
 end
 
 class Player
   attr_accessor :moves
-  attr_reader :sign
+  attr_reader :sign,:name
 
   def initialize(sign, name)
     @sign = sign
@@ -86,20 +66,7 @@ class Player
     @name = name
   end
 
-  def make_move
-    loop do
-      puts Rainbow("Enter the #{@name} move").blue.bright
-      move = gets.chomp.to_i
-      is_valid = choose_number(move)
-      unless is_valid
-        puts Rainbow("\nWrong input, try again!\n").red
-        next
-      end
-      break
-    end
-  end
 
-  private
 
   def choose_number(move)
     valid = false
