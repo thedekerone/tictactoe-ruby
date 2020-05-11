@@ -18,4 +18,14 @@ puts "\t---------"
 puts("\t7 | 8 | 9 ")
 puts "\n\n"
 
-start_game
+board = Board.new
+player1 = Player.new('x', 'player1')
+player2 = Player.new('o', 'player2')
+
+game = Game.new(board, player1, player2)
+
+
+loop do
+    game.start_game
+    puts board.draw_board
+end
