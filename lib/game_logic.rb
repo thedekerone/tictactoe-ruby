@@ -1,107 +1,101 @@
-require("rainbow")
+require('rainbow')
+# rubocop:disable Style/GlobalVars,Metrics/MethodLength
+$board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-class Person 
-    @@board=[1,2,3,4,5,6,7,8,9]
-    @@winner=false;
+$winner = false
+
+class Drawer
+  def draw_board
+    board_sign = $board
+    puts("\t#{board_sign[0]} | #{board_sign[1]} | #{board_sign[2]} ")
+    puts "\t---------"
+    puts("\t#{board_sign[3]} | #{board_sign[4]} | #{board_sign[5]} ")
+    puts "\t---------"
+    puts("\t#{board_sign[6]} | #{board_sign[7]} | #{board_sign[8]} ")
+    puts "\n"
+  end
+
+  def winner?(sign)
+    board_sign = $board
+    arr = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    arr.each do |element|
+      $winner = element.all? { |index| board_sign[index] == sign }
+      return true if $winner
+    end
+
+    $winner
+  end
 end
 
-class Drawer  < Person
-    def draw_board
-        board_sign = @@board
-        puts("\t#{board_sign[0]} | #{board_sign[1]} | #{board_sign[2]} ")
-        puts ("\t---------")
-        puts("\t#{board_sign[3]} | #{board_sign[4]} | #{board_sign[5]} ")
-        puts ("\t---------")
-        puts("\t#{board_sign[6]} | #{board_sign[7]} | #{board_sign[8]} ")
-        puts ("\n")
-    end  
+class Player
+  attr_accessor :moves
+  attr_reader :sign
 
-    def isWinner(sign)
-        board_sign=@@board
-        @@winner=true if(board_sign[0]==sign && board_sign[1]==sign && board_sign[2]==sign)
-        @@winner=true if(board_sign[3]==sign && board_sign[4]==sign && board_sign[5]==sign)
-        @@winner=true if(board_sign[6]==sign && board_sign[7]==sign && board_sign[8]==sign)
-        @@winner=true if(board_sign[0]==sign && board_sign[3]==sign && board_sign[6]==sign)
-        @@winner=true if(board_sign[1]==sign && board_sign[4]==sign && board_sign[7]==sign)
-        @@winner=true if(board_sign[2]==sign && board_sign[5]==sign && board_sign[8]==sign)
-        @@winner=true if(board_sign[0]==sign && board_sign[4]==sign && board_sign[8]==sign)
-        @@winner=true if(board_sign[2]==sign && board_sign[4]==sign && board_sign[6]==sign)
-         
-        return @@winner
+  def initialize(sign, name)
+    @sign = sign
+    @moves = []
+    @name = name
+  end
+
+  def make_move
+    loop do
+      puts Rainbow("Enter the #{@name} move").blue.bright
+      move = gets.chomp.to_i
+      is_valid = choose_number(move)
+      unless is_valid
+        puts Rainbow("\nWrong input, try again!\n").red
+        next
+      end
+      break
     end
+  end
+
+  private
+
+  def choose_number(move)
+    valid = false
+    $board = $board.map do |number|
+      if number == move
+        @moves.push(number)
+        valid = true
+        @sign
+      else
+        number
+      end
+    end
+    valid
+  end
 end
-
-class Player < Person
-
-    attr_accessor :moves
-    attr_reader :sign
-
-    def initialize(sign,name)
-        @sign=sign
-        @moves = [] 
-        @name=name
-    end
-
-    def make_move
-        while 1
-            puts Rainbow("Enter the #{@name} move").blue.bright
-            move = gets.chomp().to_i
-            is_valid = choose_number(move)
-            if(!is_valid)
-                puts Rainbow("\nWrong input, try again!\n").red
-                next
-            end
-            break;
-        end
-    end
-
-    private
-
-    def choose_number(move)
-        valid=false
-        @@board = @@board.map do |number|
-            if(number==move)
-               @moves.push(number)
-               valid=true
-               @sign
-            else
-                number
-            end
-        end
-        valid
-    end
-    
-end
-
 
 def start_game
-    drawer = Drawer.new()
-    player1 = Player.new("x","player1")
-    player2 = Player.new("o","player2")
-    endgame=0
+  drawer = Drawer.new
+  player1 = Player.new('x', 'player1')
+  player2 = Player.new('o', 'player2')
+  endgame = 0
 
-    while 1
-        player1.make_move()
-        drawer.draw_board()
-        endgame+=1
-        if(drawer.isWinner(player1.sign))  
-            puts Rainbow("Player 1 Wins").green.bright
-            break
-        end
-
-        if endgame>8
-            puts Rainbow("no winner").bright
-            break
-        end
-        
-        player2.make_move()
-        drawer.draw_board()
-        endgame+=1  
-        
-        if(drawer.isWinner(player2.sign))
-            puts Rainbow("Player 2 wins").green.bright
-            break
-        end 
+  loop do
+    player1.make_move
+    drawer.draw_board
+    endgame += 1
+    if drawer.winner?(player1.sign)
+      puts Rainbow('Player 1 Wins').green.bright
+      break
     end
+
+    if endgame > 8
+      puts Rainbow('Match tied, No winner is selected').bright
+      break
+    end
+
+    player2.make_move
+    drawer.draw_board
+    endgame += 1
+
+    if drawer.winner?(player2.sign)
+      puts Rainbow('Player 2 wins').green.bright
+      break
+    end
+  end
 end
 
+# rubocop:enable Style/GlobalVars,Metrics/MethodLength
