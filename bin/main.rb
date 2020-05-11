@@ -1,5 +1,4 @@
-
-#!/usr/bin/env ruby
+# !/usr/bin/env ruby
 require './lib/game_logic.rb'
 
 puts 'Welcome to the game of Tictoe'
@@ -20,4 +19,3 @@ puts("\t7 | 8 | 9 ")
 puts "\n\n"
 
 start_game
-
