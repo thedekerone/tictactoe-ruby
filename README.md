@@ -25,8 +25,8 @@ The Board will appear like this in the starting of the game and ask you to choos
 
 👤 **Mauricio Fow**
 
-- Github: [@githubhandle](https://github.com/thedekerone)
-- Twitter: [@twitterhandle](https://twitter.com/mauricio_fow)
+- Github: [@thedekerone](https://github.com/thedekerone)
+- Twitter: [@mauricio_fow](https://twitter.com/mauricio_fow)
 - Linkedin: [linkedin](https://www.linkedin.com/in/mauricio-fow-aranibar-b2173514b/)
 
 👤 **Shubham Singh**
