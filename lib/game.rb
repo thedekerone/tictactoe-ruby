@@ -27,5 +27,3 @@ class Game
     false
   end
 end
-
-# rubocop:enable
