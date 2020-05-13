@@ -1,4 +1,4 @@
-# !/usr/bin/env ruby
+#!/usr/bin/env ruby
 require './lib/game.rb'
 require './lib/player.rb'
 require './lib/board.rb'
