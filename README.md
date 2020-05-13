@@ -1,6 +1,6 @@
 # TIC TAC TOE Game using Ruby
 
-In order to install the game in your machine you need to clone this project using the command `https://github.com/thedekerone/tictactoe-ruby.git`
+In order to install the game in your machine you need to clone this project using the command `git clone https://github.com/thedekerone/tictactoe-ruby.git`
 
 The game is build using the Ruby and In order to play the game You need to Setup Ruby and After doing that we need to run
 `bin/main.rb`
