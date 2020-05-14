@@ -6,6 +6,12 @@ The game is build using the Ruby and In order to play the game You need to Setup
 `bin/main.rb`
 There are some set of rules that you have to follow in order to play the game
 
+### In order to run the test cases for the methods, Please follow these steps
+
+- `gem install rspec`
+- Run `rspec` to see your testcases whether they are passed or failed
+
+
 ## Instructions
 
 - This game should be played with two players or you can act as both player
